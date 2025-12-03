@@ -2,7 +2,9 @@ group = "com.android_package_installer"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "1.8.22"
+    // UPDATED: 1.8.22 is a bit old for AGP 8.7. 
+    // bumped to 1.9.24 for better stability.
+    ext.kotlin_version = "1.9.24"
     repositories {
         google()
         mavenCentral()
@@ -30,12 +32,15 @@ android {
     compileSdk = 35
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        // REQUIRED: AGP 8.0+ requires JDK 17 to run. 
+        // Using Java 11 here will cause build errors.
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        // Updated to match the Java version above
+        jvmTarget = "17"
     }
 
     sourceSets {
